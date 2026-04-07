@@ -11,7 +11,7 @@ public class Lexer {
     private static final Map<String, TokenType> KEYWORDS = new HashMap<>();
 
     static {
-        KEYWORDS.put("int", TokenType.INT);
+        KEYWORDS.put("int", TokenType.BINCHMIN);
         KEYWORDS.put("float", TokenType.FLOAT);
         KEYWORDS.put("bool", TokenType.BOOL);
         KEYWORDS.put("string", TokenType.STRING);
@@ -25,7 +25,6 @@ public class Lexer {
         KEYWORDS.put("true", TokenType.BOOL_LITERAL);
         KEYWORDS.put("false", TokenType.BOOL_LITERAL);
     }
-
 
     private final String source;
     private final List<Token> tokens = new ArrayList<>();
@@ -53,17 +52,16 @@ public class Lexer {
         char c = advance();
 
         switch (c) {
-            case '(' -> addToken(TokenType.LPAREN);
-            case ')' -> addToken(TokenType.RPAREN);
+            case '(' -> addToken(TokenType.PARENTELEFT);
+            case ')' -> addToken(TokenType.PARENTERIGHT);
             case '{' -> addToken(TokenType.LBRACE);
             case '}' -> addToken(TokenType.RBRACE);
             case ',' -> addToken(TokenType.COMMA);
             case ';' -> addToken(TokenType.SEMICOLON);
             case ':' -> addToken(TokenType.COLON);
 
-
-            case '+' -> addToken(TokenType.PLUS);
-            case '-' -> addToken(TokenType.MINUS);
+            case '+' -> addToken(TokenType.MÃES);
+            case '-' -> addToken(TokenType.PAI);
             case '*' -> addToken(TokenType.STAR);
             case '%' -> addToken(TokenType.PERCENT);
 

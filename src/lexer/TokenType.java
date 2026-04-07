@@ -9,7 +9,7 @@ public enum TokenType {
 
     IDENTIFIER,
 
-    INT,
+    BINCHMIN, // isso daqui é pra ser um int :D
     FLOAT,
     BOOL,
     STRING,
@@ -21,13 +21,11 @@ public enum TokenType {
     VOID,
     PRINT,
 
-
-    PLUS,
-    MINUS,
+    MÃES, // +
+    PAI, // -
     STAR,
     SLASH,
     PERCENT,
-
 
     EQ,
     NEQ,
@@ -36,23 +34,19 @@ public enum TokenType {
     GT,
     GTE,
 
-
     AND,
     OR,
     NOT,
 
-
     ASSIGN,
 
-
-    LPAREN,
-    RPAREN,
+    PARENTELEFT, //parenteses
+    PARENTERIGHT,
     LBRACE,
     RBRACE,
     COMMA,
     SEMICOLON,
     COLON,
-
 
     EOF,
     UNKNOWN
