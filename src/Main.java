@@ -1,5 +1,7 @@
 import lexer.Lexer;
 import lexer.Token;
+import parser.Parser;
+import parser.Expression;
 
 import java.util.List;
 
@@ -9,32 +11,26 @@ public class Main {
 
 
         String source = """
-                func int fatorial(int n) {
-                    if (n <= 1) {
-                        return 1;
-                    }
-                    return n * fatorial(n - 1);
+
+                func int somar(int n1, int n2){
+                    return n1 + n2;
                 }
-                
+     
                 func void main() {
-                    int x = 5;
-                    int resultado = fatorial(x);
-                    print(resultado);
+      
+                    int y = 111;
+                    int soma = somar(y, y);
+                    print(soma);
                 
+                    string msg = "Teste de compilador\\n";
                 
-                    float pi = 3.14;
-                    bool ok = true;
-                    string msg = "Olá mundo\\n";
-                
-                    while (x > 0) {
-                        x = x - 1;
-                    }
+        
                 }
                 """;
 
-        System.out.println("═══════════════════════════════════════════════");
-        System.out.println("         noLang Compiler - Fase 1: Lexer     ");
-        System.out.println("═══════════════════════════════════════════════");
+
+
+        System.out.println("noLang Compilador Baseado - Fase 1: Lexer");
         System.out.println();
 
         Lexer lexer = new Lexer(source);
@@ -46,5 +42,10 @@ public class Main {
 
         System.out.println();
         System.out.println("Total de tokens: " + tokens.size());
+
+        Parser parser = new Parser(tokens);
+        Expression expr = parser.parseExpression();
+
+        System.out.println("Parse feito com sucesso!");
     }
 }

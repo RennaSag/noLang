@@ -21,7 +21,7 @@ public enum TokenType {
     VOID,
     PRINT,
 
-    MÃES, // +
+    MAES, // +
     PAI, // -
     STAR,
     SLASH,

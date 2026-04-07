@@ -34,7 +34,6 @@ public class Lexer {
     private int line = 1;
     private int lineStart = 0;
 
-
     public Lexer(String source) {
         this.source = source;
     }
@@ -60,7 +59,7 @@ public class Lexer {
             case ';' -> addToken(TokenType.SEMICOLON);
             case ':' -> addToken(TokenType.COLON);
 
-            case '+' -> addToken(TokenType.MÃES);
+            case '+' -> addToken(TokenType.MAES);
             case '-' -> addToken(TokenType.PAI);
             case '*' -> addToken(TokenType.STAR);
             case '%' -> addToken(TokenType.PERCENT);
