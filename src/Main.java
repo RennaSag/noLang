@@ -39,7 +39,7 @@ public class Main {
         System.out.println("=== noLang Compilador ===");
         System.out.println();
 
-        // ── FASE 1: LEXER ──
+        // FASE 1: LEXER
         List<Token> tokens;
         try {
             Lexer lexer = new Lexer(source);
