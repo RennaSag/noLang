@@ -21,9 +21,9 @@ public class Lexer {
         KEYWORDS.put("return", TokenType.RETURN);
         KEYWORDS.put("func", TokenType.FUNC);
         KEYWORDS.put("void", TokenType.VOID);
-        KEYWORDS.put("print", TokenType.PRINT);
         KEYWORDS.put("true", TokenType.BOOL_LITERAL);
         KEYWORDS.put("false", TokenType.BOOL_LITERAL);
+        KEYWORDS.put("print", TokenType.PRINT);
     }
 
     private final String source;

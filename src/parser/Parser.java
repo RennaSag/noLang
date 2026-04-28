@@ -15,10 +15,78 @@ public class Parser {
         this.tokens = tokens;
     }
 
+
+    // ENTRY POINT PRINCIPAL
+    // Lê o programa inteiro e retorna uma lista de statements
+    // Ex: ["int x = 10;", "print(x);"]
+
+    public List<Statement> parseProgram() {
+        List<Statement> statements = new ArrayList<>();
+
+        // Fica lendo statements até chegar no fim do arquivo
+        while (!isAtEnd()) {
+            statements.add(parseStatement());
+        }
+
+        return statements;
+    }
+
+
+    private Statement parseStatement() {
+
+        // Se começa com int / float / bool / string é declaração de variável
+        if (check(TokenType.BINCHMIN) || check(TokenType.FLOAT) ||
+                check(TokenType.BOOL) || check(TokenType.STRING)) {
+            return parseVarDeclaration();
+        }
+
+        // Se começa com print → é um print statement
+        if (check(TokenType.PRINT)) {
+            return parsePrint();
+        }
+
+        throw error("Statement inválido. Esperado declaração de variável ou print");
+    }
+
+
+    // DECLARAÇÃO DE VARIÁVEL
+    // Formato: int x = 10;
+    //          ^tipo ^nome ^valor
+
+    private Statement parseVarDeclaration() {
+        Token type = advance(); // consome o tipo (int, float, etc.)
+
+        // Depois do tipo tem que vir o nome da variável
+        Token name = consume(TokenType.IDENTIFIER, "Esperado nome da variável após '" + type.value + "'");
+
+        // Depois do nome tem que vir o '='
+        consume(TokenType.ASSIGN, "Esperado '=' após nome da variável '" + name.value + "'");
+
+        // Depois do '=' vem a expressão do valor
+        Expression value = parseExpression();
+
+        // Todo statement termina com ';'
+        consume(TokenType.SEMICOLON, "Esperado ';' após declaração de variável");
+
+        return new VarDeclarationStatement(type, name, value);
+    }
+
+
+    private Statement parsePrint() {
+        advance(); // consome o token PRINT
+
+        consume(TokenType.PARENTELEFT, "Esperado '(' após print");
+        Expression value = parseExpression(); // o que vai ser impresso
+        consume(TokenType.PARENTERIGHT, "Esperado ')' após expressão do print");
+        consume(TokenType.SEMICOLON, "Esperado ';' após print(...)");
+
+        return new PrintStatement(value);
+    }
+
+
     public Expression parseExpression() {
         return parseAddition();
     }
-
 
     private Expression parseAddition() {
         Expression expr = parseMultiplication();
@@ -32,7 +100,6 @@ public class Parser {
         return expr;
     }
 
-
     private Expression parseMultiplication() {
         Expression expr = parsePrimary();
 
@@ -44,7 +111,6 @@ public class Parser {
 
         return expr;
     }
-
 
     private Expression parsePrimary() {
 
@@ -60,9 +126,15 @@ public class Parser {
             return new LiteralExpression(previous().value);
         }
 
+        if (match(TokenType.BOOL_LITERAL)) {
+            // "true" vira true, qualquer outra coisa vira false
+            return new LiteralExpression(previous().value.equals("true"));
+        }
+
         if (match(TokenType.IDENTIFIER)) {
             Token name = previous();
 
+            // Se depois do nome vier '(' é chamada de função: somar(1, 2)
             if (match(TokenType.PARENTELEFT)) {
                 List<Expression> args = new ArrayList<>();
 
@@ -127,6 +199,7 @@ public class Parser {
     }
 
     private RuntimeException error(String message) {
-        return new RuntimeException(message + " em: " + peek());
+        Token t = peek();
+        return new RuntimeException("[linha " + t.line + ", col " + t.column + "] " + message);
     }
 }
