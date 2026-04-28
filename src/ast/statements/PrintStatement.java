@@ -1,4 +1,4 @@
-package parser;
+package ast.statements;
 
 // Representa um print, por exemplo:
 //   print(x);
@@ -8,6 +8,8 @@ package parser;
 // Guarda só 1 coisa:
 //   - value: a expressão que vai ser impressa
 
+
+import ast.expressions.Expression;
 
 public class PrintStatement extends Statement {
 

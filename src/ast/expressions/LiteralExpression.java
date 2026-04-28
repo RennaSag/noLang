@@ -1,4 +1,4 @@
-package parser;
+package ast.expressions;
 
 public class LiteralExpression extends Expression {
     public final Object value;

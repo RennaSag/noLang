@@ -1,5 +1,6 @@
-package parser;
+package ast.statements;
 
+import ast.expressions.Expression;
 import lexer.Token;
 
 // Representa uma declaração de variável, por exemplo:

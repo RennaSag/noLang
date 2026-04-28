@@ -1,4 +1,4 @@
-package parser;
+package ast.expressions;
 
 public abstract class Expression {
 }

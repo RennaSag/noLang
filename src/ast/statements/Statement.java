@@ -1,4 +1,4 @@
-package parser;
+package ast.statements;
 
 // Assim como Expression é a base pra expressões (1+2, somar()),
 // Statement é a base pra instruções completas (int x = 10; / print(x);)
