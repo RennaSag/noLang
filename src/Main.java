@@ -13,6 +13,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+
+        // o source é o algoritmo escrito na linha linguagem noLang
         String source = """
                 func somar(int a, int b) {
                     return a + b;
@@ -30,6 +32,8 @@ public class Main {
                 while (x > 0) {
                     print(x);
                 }
+                
+                int z = 2
                 """;
 
         System.out.println("=== noLang Compilador ===");
